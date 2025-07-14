@@ -1,0 +1,143 @@
+.employee-container {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+
+.employee-list-heading {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #3f51b5;
+}
+
+.table-container {
+  margin-top: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+ 
+  width: 100%;
+  max-width: 1000px; 
+  max-height: 400px; 
+  overflow: auto;   
+}
+.table-container button{
+    font-size: small;
+    margin-left: 2px;
+    
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  word-wrap: break-word; 
+  font-size: 12px;
+}
+td{
+    font-size: 11px;
+   font-weight: 600;
+}
+
+thead {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.blue {
+  background-color: #2196f3;
+}
+
+.yellow {
+  background-color: #ffc107;
+}
+
+.red {
+  background-color: #f44336;
+  
+}
+
+
+.button-row {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+.add-btn {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #0b5ed7;
+}
+
+
+
+    

@@ -1,0 +1,112 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="menu-icon">
+    <i class="fa fa-bars"></i>
+  </div>
+  <div class="navbar-title"></div>
+  <div class="admin-profile">
+    <i class="fa fa-user-circle"></i> Admin User
+  </div>
+</nav>
+
+ 
+
+<div class="dashboard-container">
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h2>Dashboard</h2>
+    
+  </div>
+
+  <!-- Statistic Cards -->
+  <div class="stats-cards">
+    <div class="card card-blue">
+      <h5 id="c1" class="card-title">TOTAL EMPLOYEES</h5>
+      <div class="card-value">156</div>
+     <div><i class="fas fa-users"></i></div>
+    </div>
+    <div class="card card-green">
+      <h5 id="c2" class="card-title">ACTIVE LEAVES</h5>
+      <div class="card-value">23</div>
+      <i class="fa-solid fa-calendar"></i>
+    </div>
+    <div class="card card-cyan">
+      <h5 id="c3" class="card-title">PENDING APPROVALS</h5>
+      <div class="card-value">8</div><i class="fa-solid fa-hourglass-half"></i>
+    </div>
+    <div class="card card-yellow">
+      <h5 id="c4" class="card-title">THIS MONTH</h5>
+      <div class="card-value">45</div>
+      <i class="fa-solid fa-calendar-days"></i>
+    </div>
+  </div>
+
+  <!-- Leave Table -->
+   
+  <!-- Leave Table + Quick Actions Side-by-Side -->
+ <div class="dashboard-flex">
+
+  <!-- Recent Leave Applications -->
+  <div class="section leave-section">
+    <h4 class="section-title blue">Recent Leave Applications</h4>
+    <table class="leave-table">
+      <thead>
+        <tr>
+          <th>EMPLOYEE</th>
+          <th>LEAVE TYPE</th>
+          <th>DURATION</th>
+          <th>STATUS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>Sick Leave</td>
+          <td>2 days</td>
+          <td><span class="badge badge-warning">Pending</span></td>
+          <td>
+            <button class="btn btn-success">Approve</button>
+            <button class="btn btn-danger">Reject</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>Annual Leave</td>
+          <td>5 days</td>
+          <td><span class="badge badge-success">Approved</span></td>
+          <td>
+            <button class="btn btn-info">View</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Mike Johnson</td>
+          <td>Personal Leave</td>
+          <td>1 day</td>
+          <td><span class="badge badge-warning">Pending</span></td>
+          <td>
+            <button class="btn btn-success">Approve</button>
+            <button class="btn btn-danger">Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section quick-section">
+    <h4 class="section-title blue">Quick Actions</h4>
+    <div class="quick-buttons">
+      <button class="btn quick-btn blue"><i class="fa-solid fa-user-plus"></i> Add New Employee</button>
+      <button class="btn quick-btn green"><i class="fa fa-calendar-plus"></i> New Leave Request</button>
+      <button class="btn quick-btn cyan"><i class="fa fa-file-export"></i> Export Reports</button>
+      <button class="btn quick-btn yellow"><i class="fa fa-cog"></i> System Settings</button>
+    </div>
+  </div>
+
+ </div>
+
+
+</div>
+

@@ -1,0 +1,132 @@
+<div class="employee-container">
+  <div class="header">
+    <h2>Employee Management</h2>
+    <button class="add-btn" (click)="openModel()" >Add Employee</button>
+  </div>
+
+  <h4 class="employee-list-heading">Employee List</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>CONTACT</th>
+          <th>DEPARTMENT</th>
+          <th>ACTIONS</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of employeeList; track $index) {
+            <tr>
+          <td>{{$index+1}}</td>
+          <td>{{item.employeeName}}</td>
+          <td>{{item.emailId}}</td>
+          <td>{{item.contactNo}}</td>
+          <td>{{item.deptName}}</td>
+          
+          <td>
+           <button  class="btn btn-warning">Edit</button>
+           <button  class="btn btn-danger" >Delete</button>
+            
+          </td>
+        </tr>
+        }
+        
+       
+       
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal" #newModal tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add new employee</h5>
+          <button type="button" (click)="closeModel()" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="employeeName"  class="form-label" >Employee Name</label>
+                <input type="text" [(ngModel)]="employeeObj.employeeName" name="employeeName" class="form-control" id="employeeName" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="contactNo" class="form-label" >Contact Number</label>
+                <input type="text" [(ngModel)]="employeeObj.contactNo" name="contactNo" class="form-control" id="contactNo" required>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="emailId" class="form-label" >Email Id</label>
+                <input type="text" [(ngModel)]="employeeObj.emailId" name="emailId" class="form-control" id="emailId" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="deptId" class="form-label" >Department </label>
+                <select type="text" [(ngModel)]="employeeObj.deptId" name="deptId" class="form-select" id="deptId" required>
+                  <option value="">Select Department</option>
+                  @for (item of deptList$ |async; track $index) {
+                    <option [value]="item.deptId">{{item.deptName}}</option>
+                  }
+              </select>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="password" class="form-label" >Password</label>
+                <input type="text" [(ngModel)]="employeeObj.password" name="password" class="form-control" id="password" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="gender" class="form-label" >Gender</label>
+                <select type="text" [(ngModel)]="employeeObj.gender" name="gender" class="form-select" id="gender" required>
+                  <option value="">select your gender</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                  <option value="3">Other</option>
+                  </select>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="role" class="form-label" >Role</label>
+                <select type="text" [(ngModel)]="employeeObj.role" name="role" class="form-select" id="role" required>
+                  <option value="">Select role</option>
+                  @for (item of roleList$|async; track $index) {
+                    <option >{{item}}</option>
+                  }
+                  
+                  
+                  </select>
+              </div>
+            </div>
+            </div> 
+            <div class="button-row">
+  <button type="button" class="btn cancel-btn"  (click)="closeModel()">Cancel</button>
+  <button type="submit" class="btn add-btn" (click)="onSaveEmployee()">Add Employee</button>
+</div>
+
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

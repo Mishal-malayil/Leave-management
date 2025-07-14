@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="top-bar">
+    <h2>Leave Management</h2>
+    <button class="add-btn" (click)="openModel()">Add Leave Request</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active">My Leaves</button>
+    <button class="tab">Pending Approval</button>
+    <button class="tab">Approved</button>
+  </div>
+
+  <h3 class="table-title">My Leave Requests</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>LEAVE ID</th>
+          <th>EMPLOYEE</th>
+          <th>LEAVE TYPE</th>
+          <th>FROM DATE</th>
+          <th>TO DATE</th>
+          <th>DAYS</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of leaveList; track $index) {
+        <tr>
+          <td>{{$index+1}}</td>
+          <td>{{item.employeeName}}</td>
+          <td>{{item.leaveType}}</td>
+          <td>{{item.fromDate| date:'dd-MMM-yy'}}</td>
+          <td>{{item.toDate | date:'dd-MMM-yyyy'}}</td>
+          <td>{{item.noOfDays }}</td>
+          <td>
+            @if (item.isApproved == null) {
+            <span class="badge badge-warning">Pending</span>
+            }
+            @else if (item.isApproved == true) {
+            <span class="badge badge-success">Approved</span>
+            }
+            @else if (item.isApproved == false) {
+            <span class="badge badge-danger">Rejected</span>
+            }
+          </td>
+
+          <td>
+            <button class="btn btn-primary"></button>
+            <button class="btn btn-success"></button>
+            <button class="btn btn-warning"></button>
+          </td>
+        </tr>
+        }
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal" #newModal tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Leave Request</h5>
+        <button type="button" (click)="closeModel()" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="leaveForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="LeaveType" class="form-label">Leave Type </label>
+                <select formControlName="leaveType" type="text" class="form-select" id="LeaveType" required>
+                  <option value="">Select your leave type</option>
+                  <option value="Sick leave">Sick Leave </option>
+                  <option value="Annual leave">Annual Leave</option>
+                  <option value="Personal leave">Personal Leave </option>
+                  <option value="Maternity leave">Maternity Leave</option>
+                  <option value="Emergency leave">Emergency Leave</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="fromDate" class="form-label">From Date</label>
+                <input formControlName="fromDate" type="date" class="form-control" id="fromDate" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="toDate" class="form-label"> To Date</label>
+                <input formControlName="toDate" type="date" class="form-control" id="toDate" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="noOfDays" class="form-label">Number of days </label>
+                <input formControlName="noOfDays" type="number" class="form-control" id="noOfDays" required>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="details" class="form-label">Details/Reason</label>
+                <textarea formControlName="details" class="form-control" id="details" required>
+                  </textarea>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="button-row">
+            <button type="button" class="btn cancel-btn" (click)="closeModel()">Cancel</button>
+            <button type="submit" class="btn add-btn" (click)="onSave()">Submit Request</button>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

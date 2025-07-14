@@ -1,0 +1,19 @@
+<div class="app-container">
+<nav  class="sidebar">
+  <h2 class="brand">ELMS Admin</h2>
+  <ul class="nav-links">
+    <li [routerLink]="['/dashboard']"><i class="fas fa-home"></i> Dashboard</li>
+    <li [routerLink]="['/employee']"><i class="fas fa-users"></i> Employees</li>
+    <li [routerLink]="['/leave']"><i class="fas fa-calendar-alt"></i> Leave Management</li>
+    <li><i class="fas fa-chart-bar"></i> Reports</li>
+    <li><i class="fas fa-cog"></i> Settings</li>
+  </ul> 
+  <div class="logout">
+    <button  (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+     
+</nav>
+ <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

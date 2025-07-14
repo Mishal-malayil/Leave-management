@@ -1,0 +1,26 @@
+ <div class="body">
+ <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <i class="fas fa-user-shield icon"></i>
+        <h2>Admin Login</h2>
+        <p>Employee Leave Management System</p>
+      </div>
+      <form>
+        <div class="input-group">
+          <label><i class="fas fa-envelope"></i> Email Address</label>
+          <input type="email" name="emailId" [(ngModel)]="loginobj.emailId" required>
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-lock"></i> Password</label>
+          <input type="password" name="password" [(ngModel)]="loginobj.password" required>
+        </div>
+        <div class="remember">
+          <input type="checkbox" id="remember">
+          <label for="remember">Remember me</label>
+        </div>
+        <button type="submit" (click)="onLogin()"  class="login-btn"><i class="fas fa-sign-in-alt" ></i> Login</button>
+      </form>
+    </div>
+  </div>
+</div>

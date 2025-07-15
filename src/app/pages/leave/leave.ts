@@ -1,11 +1,11 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeService } from '../../services/employee';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-leave',
-  imports: [ReactiveFormsModule,DatePipe],
+  imports: [ReactiveFormsModule,DatePipe,NgClass],
   templateUrl: './leave.html',
   styleUrl: './leave.css'
 })
@@ -29,6 +29,7 @@ export class Leave implements OnInit {
 
     })
      leaveList: any []=[];
+     currentTabName:string='myleave';
 
     constructor(){
       const loggedData =localStorage.getItem('LeaveUser');
@@ -71,4 +72,8 @@ export class Leave implements OnInit {
           }
         })
  }
+  changeTab(tabName:string){
+       this.currentTabName=tabName;
+  }
+  
 }

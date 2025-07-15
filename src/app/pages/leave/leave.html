@@ -5,11 +5,15 @@
   </div>
 
   <div class="tabs">
-    <button class="tab active">My Leaves</button>
-    <button class="tab">Pending Approval</button>
-    <button class="tab">Approved</button>
+    <button class="tab " [ngClass]="currentTabName == 'myleave'?'active':''" (click)="changeTab('myleave')">My
+      Leaves</button>
+    <button class="tab " [ngClass]="currentTabName == 'leaveRequest'?'active':''"
+      (click)="changeTab('leaveRequest')">Leave Request</button>
+
   </div>
 
+
+  @if (currentTabName == 'myleave') {
   <h3 class="table-title">My Leave Requests</h3>
   <div class="table-container">
     <table>
@@ -46,7 +50,7 @@
             }
           </td>
 
-          <td>
+          <td class="text-nowrap">
             <button class="btn btn-primary"></button>
             <button class="btn btn-success"></button>
             <button class="btn btn-warning"></button>
@@ -58,6 +62,67 @@
       </tbody>
     </table>
   </div>
+  }
+
+
+  @else {
+  <h3 class="table-title text-warning">Pending Approval</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>LEAVE ID</th>
+          <th>EMPLOYEE</th>
+          <th>LEAVE TYPE</th>
+          <th>FROM DATE</th>
+          <th>TO DATE</th>
+          <th>DAYS</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>1</td>
+          <td>John </td>
+          <td>Annual</td>
+          <td>18-05-2025</td>
+          <td>21-05-2025</td>
+          <td>2</td>
+          <td>
+
+            <span class="badge badge-warning">Pending</span>
+
+
+            <span class="badge badge-success">Approved</span>
+
+
+            <span class="badge badge-danger">Rejected</span>
+
+          </td>
+
+          <td class="text-nowrap">
+            <button class="btn btn-success px-3 py-1  me-2">Approve</button>
+            <button class="btn btn-danger px-3 py-1 ">Reject</button>
+          </td>
+
+
+
+
+
+        </tr>
+
+
+
+      </tbody>
+    </table>
+  </div>
+  }
+
+
+
+
 </div>
 
 

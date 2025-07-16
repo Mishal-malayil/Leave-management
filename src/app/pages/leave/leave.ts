@@ -1,11 +1,11 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeService } from '../../services/employee';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-leave',
-  imports: [ReactiveFormsModule,DatePipe],
+  imports: [ReactiveFormsModule,DatePipe,NgClass,CommonModule],
   templateUrl: './leave.html',
   styleUrl: './leave.css'
 })
@@ -29,6 +29,8 @@ export class Leave implements OnInit {
 
     })
      leaveList: any []=[];
+     ApprovalLeaveList:any[]=[];
+     currentTabName:string='myleave';
 
     constructor(){
       const loggedData =localStorage.getItem('LeaveUser');
@@ -40,6 +42,7 @@ export class Leave implements OnInit {
 
     ngOnInit(): void {
       this.leaveLoads()
+      this.GetAllLeaves()
     }
       
 
@@ -62,13 +65,45 @@ export class Leave implements OnInit {
       }
     })
    }
+   GetAllLeaves(){
+    
+    this.employeeService.GetAllLeaves().subscribe({
+      next:(result:any)=>{
+          this.ApprovalLeaveList=result.data.filter((m:any)=>m.isApproved == null)
+      }
+    })
+   }
 
    onSave(){
         const formValue= this.leaveForm.value;
         this.employeeService.onAddleave(formValue).subscribe({
           next:()=>{
+            this.leaveLoads()
+            alert("Leave add successfully")
+            this.closeModel()
+          },error:()=>{
 
           }
         })
  }
+  changeTab(tabName:string){
+       this.currentTabName=tabName;
+  }
+  
+  approveLeave(id:number){
+     this.employeeService.ApproveLeave(id).subscribe({
+      next:()=>{
+        alert('Leave Approved')
+        this.GetAllLeaves()
+      }
+     })
+  }
+  rejectLeave(id:number){
+     this.employeeService.RejectLeave(id).subscribe({
+      next:()=>{
+        alert('Leave Rejected')
+        this.GetAllLeaves()
+      }
+     })
+  }
 }

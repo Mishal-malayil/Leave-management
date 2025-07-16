@@ -5,11 +5,15 @@
   </div>
 
   <div class="tabs">
-    <button class="tab active">My Leaves</button>
-    <button class="tab">Pending Approval</button>
-    <button class="tab">Approved</button>
+    <button class="tab " [ngClass]="currentTabName == 'myleave'?'active':''" (click)="changeTab('myleave')">My
+      Leaves</button>
+    <button class="tab " [ngClass]="currentTabName == 'leaveRequest'?'active':''"
+      (click)="changeTab('leaveRequest')">Leave Request</button>
+
   </div>
 
+
+  @if (currentTabName == 'myleave') {
   <h3 class="table-title">My Leave Requests</h3>
   <div class="table-container">
     <table>
@@ -35,18 +39,21 @@
           <td>{{item.toDate | date:'dd-MMM-yyyy'}}</td>
           <td>{{item.noOfDays }}</td>
           <td>
-            @if (item.isApproved == null) {
-            <span class="badge badge-warning">Pending</span>
-            }
-            @else if (item.isApproved == true) {
-            <span class="badge badge-success">Approved</span>
-            }
-            @else if (item.isApproved == false) {
-            <span class="badge badge-danger">Rejected</span>
-            }
+            <span *ngIf="item.isApproved == null" class="badge text-bg-warning">
+              Pending
+            </span>
+
+            <span *ngIf="item.isApproved == true" class="badge text-bg-success">
+              Approved
+            </span>
+
+            <span *ngIf="item.isApproved == false" class="badge text-bg-danger">
+              rejected
+            </span>
+
           </td>
 
-          <td>
+          <td class="text-nowrap">
             <button class="btn btn-primary"></button>
             <button class="btn btn-success"></button>
             <button class="btn btn-warning"></button>
@@ -58,6 +65,53 @@
       </tbody>
     </table>
   </div>
+  }
+
+
+  @else {
+  <h3 class="table-title text-warning">Pending Approval</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>LEAVE ID</th>
+          <th>EMPLOYEE</th>
+          <th>LEAVE TYPE</th>
+          <th>FROM DATE</th>
+          <th>TO DATE</th>
+          <th>DAYS</th>
+
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        @for (item of ApprovalLeaveList; track $index) {
+        <tr>
+          <td>{{$index+1}}</td>
+          <td>{{item.employeeName}}</td>
+          <td>{{item.leaveType}}</td>
+          <td>{{item.fromDate| date:'dd-MMM-yy'}}</td>
+          <td>{{item.toDate| date:'dd-MMM-yyyy'}}</td>
+          <td>{{item.noOfDays }}</td>
+
+          <td class="text-nowrap">
+
+            <button class="btn btn-success me-2" (click)="approveLeave(item.leaveId)">Approve</button>
+            <button class="btn btn-danger" (click)="rejectLeave(item.leaveId)">Reject</button>
+          </td>
+        </tr>
+        }
+
+
+      </tbody>
+    </table>
+  </div>
+  }
+
+
+
+
 </div>
 
 

@@ -16,6 +16,10 @@ export class EmployeeService {
   getAllemployee(): Observable<APIResponseModel> {
     return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/GetEmployees")
   }
+  GetAllLeaves(): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/GetAllLeaves")
+  }
+
   getdept() {
     return this.http.get("https://freeapi.miniprojectideas.com/api/EmployeeLeave/GetDepartments").pipe(
       map((res: any) => res.data)
@@ -35,6 +39,21 @@ export class EmployeeService {
   getAllLeaveByEmpId(EmpId: number): Observable<APIResponseModel> {
     return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/GetAllLeavesByEmployeeId?id=" + EmpId)
   }
-
-
+  GetLeavesForApprovalBySuperwiserId(EmpId: number): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/GetLeavesForApprovalBySuperwiserId?id=" + EmpId)
+  }
+ ApproveLeave(leaveId: number): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/ApproveLeave?id=" + leaveId)
+  }
+  RejectLeave(leaveId: number): Observable<APIResponseModel> {
+    return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/RejectLeave?id=" + leaveId)
+  }
+ 
+  deleteEmployee(empId: number) {
+  return this.http.get<APIResponseModel>(
+    "https://freeapi.miniprojectideas.com/api/EmployeeApp/DeleteEmployeeByEmpId?empId="+empId
+  );
 }
+
+
+  }

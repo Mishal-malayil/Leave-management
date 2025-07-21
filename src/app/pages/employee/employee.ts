@@ -1,14 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { EmployeeService } from '../../services/employee';
 import { APIResponseModel, employeeList, EmployeeModel } from '../../model/employees.model';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-
-
-
 
 @Component({
   selector: 'app-employee',
@@ -20,11 +16,13 @@ export class Employee implements OnInit {
   employeeService = inject(EmployeeService)
   employeeList: employeeList[] = []
 
+ @ViewChild('popupForm') popupForm!: ElementRef;
   @ViewChild("newModal") newModel!: ElementRef
   employeeObj: EmployeeModel = new EmployeeModel();
 
   deptList$: Observable<any[]> = new Observable<any[]>;
   roleList$: Observable<any[]> = new Observable<any[]>;
+ 
 
 
   ngOnInit(): void {
@@ -54,6 +52,24 @@ export class Employee implements OnInit {
       this.newModel.nativeElement.style.display = "none"
     }
   }
+  openModal(item:any) {
+    this.employeeObj=item
+    if (this.popupForm) {
+      this.popupForm.nativeElement.style.display = "block"
+    }
+  }
+
+  closeModal() {
+     if (this.popupForm) {
+      this.popupForm.nativeElement.style.display = "none"
+    }
+  }
+
+  saveUser() {
+    console.log('User saved:', this.employeeObj);
+    this.closeModal();
+  }
+  
   onSaveEmployee() {
     this.employeeService.onSavenewEmployee(this.employeeObj).subscribe({
       next: (res: any) => {
@@ -71,14 +87,14 @@ export class Employee implements OnInit {
       }
     })
   }
-  onDeleteEmployee(empId: number): void {
-  if (!empId) {
+  onDeleteEmployee(id: number): void {
+  if (!id) {
     alert("Invalid employee ID");
     return;
   }
 
   if (confirm("Are you sure you want to delete this employee?")) {
-    this.employeeService.deleteEmployee(empId).subscribe({
+    this.employeeService.deleteEmployee(id).subscribe({
       next: (res: APIResponseModel) => {
         if (res.result) {
           alert("Employee deleted successfully");
@@ -95,5 +111,21 @@ export class Employee implements OnInit {
   }
 }
 
-
+updateEmployee(){
+     this.employeeService.OnUpdateEmployee(this.employeeObj).subscribe({
+    next: (res: APIResponseModel) => {
+      if (res.result) {
+        alert('Employee updated successfully');
+        this.getEmployee();
+        this.closeModal();
+      } else {
+        alert(res.message || 'Update failed');
+      }
+    },
+    error: (err) => {
+      console.error('Update error:', err);
+      alert('Something went wrong');
+    }
+  });
+}
 }

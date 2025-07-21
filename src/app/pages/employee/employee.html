@@ -29,8 +29,8 @@
           <td>{{item.deptName}}</td>
           
           <td>
-           <button  class="btn btn-warning">Edit</button>
-           <button  class="btn btn-danger" (click)="onDeleteEmployee(item.employeeId)" >Delete</button>
+           <button  class="btn btn-warning"(click)="openModal(item)" >Edit</button>
+           <button  class="btn btn-danger" (click)="onDeleteEmployee(item.employeeId)">Delete</button>
             
           </td>
         </tr>
@@ -130,3 +130,95 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal" #popupForm tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Employee</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="employeeName"  class="form-label" >Employee Name</label>
+                <input type="text" [(ngModel)]="employeeObj.employeeName" name="employeeName" class="form-control" id="employeeName" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="contactNo" class="form-label" >Contact Number</label>
+                <input type="text" [(ngModel)]="employeeObj.contactNo" name="contactNo" class="form-control" id="contactNo" required>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="emailId" class="form-label" >Email Id</label>
+                <input type="text" [(ngModel)]="employeeObj.emailId" name="emailId" class="form-control" id="emailId" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="deptId" class="form-label" >Department </label>
+                <select type="text" [(ngModel)]="employeeObj.deptId" name="deptId" class="form-select" id="deptId" required>
+                  <option value="">Select Department</option>
+                  @for (item of deptList$ |async; track $index) {
+                    <option [value]="item.deptId">{{item.deptName}}</option>
+                  }
+              </select>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="password" class="form-label" >Password</label>
+                <input type="text" [(ngModel)]="employeeObj.password" name="password" class="form-control" id="password" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb3">
+                <label for="gender" class="form-label" >Gender</label>
+                <select type="text" [(ngModel)]="employeeObj.gender" name="gender" class="form-select" id="gender" required>
+                  <option value="">select your gender</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                  <option value="3">Other</option>
+                  </select>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+              <div class="mb3">
+                <label for="role" class="form-label" >Role</label>
+                <select type="text" [(ngModel)]="employeeObj.role" name="role" class="form-select" id="role" required>
+                  <option value="">Select role</option>
+                  @for (item of roleList$|async; track $index) {
+                    <option >{{item}}</option>
+                  }
+                  
+                  
+                  </select>
+              </div>
+            </div>
+            </div> 
+            <div class="button-row">
+  <button type="button" class="btn cancel-btn"  (click)="closeModal()">Cancel</button>
+  <button type="submit" class="btn btn-success" (click)="updateEmployee()">Update</button>
+</div>
+
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 

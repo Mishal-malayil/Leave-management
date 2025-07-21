@@ -15,6 +15,7 @@ export interface APIResponseModel {
 }
  
 export interface employeeList{
+empId: number;
     
       "employeeId": number;
       "employeeName": string;
@@ -35,6 +36,8 @@ export class EmployeeModel {
   password: string;
   gender: string;
   role: string;
+  
+  
 
   constructor(){
     this.contactNo='',

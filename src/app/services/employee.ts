@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { APIResponseModel } from '../model/employees.model';
+import { APIResponseModel, EmployeeModel } from '../model/employees.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,11 +49,17 @@ export class EmployeeService {
     return this.http.get<APIResponseModel>("https://freeapi.miniprojectideas.com/api/EmployeeLeave/RejectLeave?id=" + leaveId)
   }
  
-  deleteEmployee(empId: number) {
-  return this.http.get<APIResponseModel>(
-    "https://freeapi.miniprojectideas.com/api/EmployeeApp/DeleteEmployeeByEmpId?empId="+empId
+  deleteEmployee(id: number) {
+  return this.http.delete<APIResponseModel>(
+    "https://freeapi.miniprojectideas.com/api/EmployeeLeave/DeleteEmployee?id="+id
   );
+}
+  OnUpdateEmployee(employee: EmployeeModel): Observable<APIResponseModel> {
+    return this.http.put<APIResponseModel>(
+      "https://freeapi.miniprojectideas.com/api/EmployeeLeave/UpdateEmployee",
+      employee);
+}
+
 }
 
 
-  }
